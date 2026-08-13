@@ -21,3 +21,41 @@ initialize_reef <- function(num_corals) {
 
   return(reef)
 }
+
+#initialize_reef(8)
+
+
+
+# Need to create a function for coral growth
+
+# 2d8 roll
+growth_roll <- function() {
+  roll1d8 <- sample(1:8, size = 1, replace = TRUE)
+  return(roll1d8)
+}
+
+# growth function
+growth <- function(reef, growth_roll, row, col) {
+  growth_row_offset <- c(-1, -1, -1, 0, 1, 1, 1, 0)
+  growth_col_offset <- c(-1, 0, 1, 1, 1, 0, -1, -1)
+
+  growth_row <- row + growth_row_offset[growth_roll]
+  growth_col <- col + growth_col_offset[growth_roll]
+
+  reef[growth_row, growth_col] <- 1
+
+  return(reef)
+}
+
+# coral_fate <- function(roll, mort_thr, grow_thr) {
+#   if (roll <= mort_thr) {
+#     fate <- "death :("
+#   }
+#   else if (roll >= grow_thr) {
+#     fate <- "growth :)"
+#   }
+#   else {
+#     fate <- "survival :|"
+#   }
+#   return(fate)
+# }
